@@ -14,7 +14,7 @@ import com.newlecture.web.dao.oracle.OracleNoticeDao;
 import com.newlecture.web.entity.Notice;
 
 //메소드가없으면 405?
-@WebServlet("/notice/edit")
+@WebServlet("/mynote/edit")
 public class editController extends HttpServlet{
 	
 	@Override
@@ -43,16 +43,16 @@ public class editController extends HttpServlet{
 
 //선생님 풀이
 		
-NoticeDao noticeDao  = new OracleNoticeDao();
+MynoteDao mynoteDao  = new OracleMynoteDao();
 		
-Notice notice = new Notice();
-notice.setId(id);
-notice.setTitle(title);
-notice.setContent(content);
+Mynote mynote = new Mynote();
+mynote.setId(id);
+mynote.setTitle(title);
+mynote.setContent(content);
 		
 int result=0;
 try {
-	result = noticeDao.update(notice);
+	result = mynoteDao.update(mynote);
 } catch (ClassNotFoundException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -89,12 +89,12 @@ else
     //hello -> null
     	
     	
-      NoticeDao noticeDao  = new OracleNoticeDao();
+      MynoteDao mynoteDao  = new OracleMynoteDao();
       
       Integer id = Integer.parseInt(request.getParameter("id"));
   
        try {
-		request.setAttribute("notice",  noticeDao.get(id));
+		request.setAttribute("mynote",  mynoteDao.get(id));
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -103,7 +103,7 @@ else
 		e.printStackTrace();
 	}
        
-       request.getRequestDispatcher("../WEB-INF/view/notice/edit.jsp").forward(request, response);
+       request.getRequestDispatcher("../WEB-INF/view/mynote/edit.jsp").forward(request, response);
 
    }
    

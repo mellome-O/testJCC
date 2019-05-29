@@ -9,27 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jhtacybercampus.dao.MynoteDao;
+import com.jhtacybercampus.web.dao.oracle.OracleMynoteDao;
 import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.dao.oracle.OracleNoticeDao;
 import com.newlecture.web.entity.Notice;
 
 //메소드가없으면 405?
-@WebServlet("/notice/del")
+@WebServlet("/mynote/del")
 public class delController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
     
     Integer id = Integer.parseInt(request.getParameter("id"));
-    NoticeDao noticeDao  = new OracleNoticeDao();
+    MynoteDao mynoteDao  = new OracleMynoteDao();
 
     try {
-		noticeDao.delete(id);
+		mynoteDao.delete(id);
 	} catch (ClassNotFoundException | SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
     
-    response.sendRedirect("../notice/list");
+    response.sendRedirect("../mynote/list");
    
  }
 }

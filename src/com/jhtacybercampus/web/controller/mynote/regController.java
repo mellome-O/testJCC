@@ -13,7 +13,7 @@ import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.dao.oracle.OracleNoticeDao;
 import com.newlecture.web.entity.Notice;
 
-@WebServlet("/notice/reg")
+@WebServlet("/mynote/reg")
 public class regController extends HttpServlet {
 
    @Override
@@ -22,15 +22,15 @@ public class regController extends HttpServlet {
       String title = request.getParameter("title");
       String content = request.getParameter("content");
       
-      NoticeDao noticeDao = new OracleNoticeDao();
-      Notice notice = new Notice();
-      notice.setTitle(title);
-      notice.setContent(content);
+      MynoteDao mynoteDao = new OracleMynoteDao();
+      Mynote mynote = new Mynote();
+      mynote.setTitle(title);
+      mynote.setContent(content);
       
       int result = 0;
       
       try {
-         result = noticeDao.insert(notice);
+         result = mynoteDao.insert(mynote);
       } catch (ClassNotFoundException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -40,15 +40,15 @@ public class regController extends HttpServlet {
       }
       
       if(result != 1)
-         response.sendRedirect("../notice/error");
+         response.sendRedirect("../mynote/error");
       else
-         response.sendRedirect("../notice/list");
+         response.sendRedirect("../mynote/list");
        
       
    }
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      request.getRequestDispatcher("/WEB-INF/view/notice/reg.jsp").forward(request, response);
+      request.getRequestDispatcher("/WEB-INF/view/mynote/reg.jsp").forward(request, response);
    }
    
 }
